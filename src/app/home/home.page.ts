@@ -9,17 +9,20 @@ import { Component } from '@angular/core';
 export class HomePage {
   frase: string;
   autor: string;
-  constructor(private http: HttpClient) {}
+  animacao: boolean;
+  constructor(private http: HttpClient) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.solicitarFrase();
   }
 
-  solicitarFrase(){
+  solicitarFrase() {
+    this.animacao = false;
     const url = "http://lucasreno.kinghost.net/frase";
-    this.http.get(url).subscribe( resposta => {
+    this.http.get(url).subscribe(resposta => {
       this.frase = resposta[0].frase;
       this.autor = resposta[0].autor;
+      this.animacao = true;
     });
   }
 
